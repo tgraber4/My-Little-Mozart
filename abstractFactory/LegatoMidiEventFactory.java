@@ -6,8 +6,8 @@ import javax.sound.midi.ShortMessage;
 
 public class LegatoMidiEventFactory implements MidiEventFactory {
 	
-	static int noteOnCounter = 0;
-	static int noteOffCounter = 0;
+	private static int noteOnCounter = 0;
+	private static int noteOffCounter = 0;
 	
 	/**
 	 * Creates a MIDI Node On event with 80 ticks longer duration
