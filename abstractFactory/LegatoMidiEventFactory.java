@@ -5,9 +5,12 @@ import javax.sound.midi.MidiEvent;
 import javax.sound.midi.ShortMessage;
 
 public class LegatoMidiEventFactory implements MidiEventFactory {
-
+	
+	static int noteOnCounter = 0;
+	static int noteOffCounter = 0;
+	
 	/**
-	 * Creates a normal MIDI Node On event
+	 * Creates a MIDI Node On event with 80 ticks longer duration
 	 */
 	@Override
 	public MidiEvent createNoteOn(int tick, int note, int velocity, int channel) throws InvalidMidiDataException {
@@ -17,11 +20,13 @@ public class LegatoMidiEventFactory implements MidiEventFactory {
 		} catch (javax.sound.midi.InvalidMidiDataException e) {
 			e.printStackTrace();
 		}
-	    return new MidiEvent(message, tick);
+	    int newTickAmount = tick + this.getNoteOnCounter() * 80;
+	    this.addNoteOnCounter();
+	    return new MidiEvent(message, newTickAmount);
 	}
 
 	/**
-	 * Creates a MIDI Node Off event that ends 80 ticks later
+	 * Creates a MIDI Node Off event with 80 ticks longer duration
 	 */
 	@Override
 	public MidiEvent createNoteOff(int tick, int note, int channel) throws InvalidMidiDataException {
@@ -31,8 +36,38 @@ public class LegatoMidiEventFactory implements MidiEventFactory {
 		} catch (javax.sound.midi.InvalidMidiDataException e) {
 			e.printStackTrace();
 		}
-	    int extendDuration = 80;
-	    return new MidiEvent(message, tick + extendDuration);
+	    int newTickAmount = tick + (this.getNoteOffCounter() + 1) * 80;
+	    this.addNoteOffCounter();
+	    return new MidiEvent(message, newTickAmount);
+	}
+	
+	/**
+	 * Returns the amount of Note On MIDI Events that have been created so far
+	 * @return
+	 */
+	private int getNoteOnCounter () {
+		return noteOnCounter;
+	}
+	/**
+	 * Adds 1 to the Note On counter
+	 */
+	private void addNoteOnCounter () {
+		noteOnCounter++;
+	}
+	
+	/**
+	 * Returns the amount of Note Off MIDI Events that have been created so far
+	 * @return
+	 */
+	private int getNoteOffCounter () {
+		return noteOffCounter;
+	}
+	
+	/**
+	 * Adds 1 to the Note Off counter
+	 */
+	private void addNoteOffCounter () {
+		noteOffCounter++;
 	}
 
 }

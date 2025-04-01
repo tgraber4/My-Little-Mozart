@@ -5,10 +5,9 @@ import javax.sound.midi.MidiEvent;
 import javax.sound.midi.ShortMessage;
 
 public class StaccatoMidiEventFactory implements MidiEventFactory {
-	int gap = 20;
 	
 	/**
-	 * Creates a MIDI Node On event with that starts 20 ticks later
+	 * Creates a normal MIDI Node On event
 	 */
 	@Override
 	public MidiEvent createNoteOn(int tick, int note, int velocity, int channel) throws InvalidMidiDataException {
@@ -18,11 +17,11 @@ public class StaccatoMidiEventFactory implements MidiEventFactory {
 		} catch (javax.sound.midi.InvalidMidiDataException e) {
 			e.printStackTrace();
 		}
-	    return new MidiEvent(message, tick + gap);
+	    return new MidiEvent(message, tick);
 	}
 
 	/**
-	 * Creates a MIDI Node Off event that ends 100 ticks earlier
+	 * Creates a MIDI Node Off event that ends 120 ticks earlier
 	 */
 	@Override
 	public MidiEvent createNoteOff(int tick, int note, int channel) throws InvalidMidiDataException {
@@ -32,7 +31,7 @@ public class StaccatoMidiEventFactory implements MidiEventFactory {
 		} catch (javax.sound.midi.InvalidMidiDataException e) {
 			e.printStackTrace();
 		}
-	    return new MidiEvent(message, tick - 120 + gap);
+	    return new MidiEvent(message, tick - 120);
 	}
 
 }
