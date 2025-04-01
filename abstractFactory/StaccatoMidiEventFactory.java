@@ -6,6 +6,10 @@ import javax.sound.midi.ShortMessage;
 
 public class StaccatoMidiEventFactory implements MidiEventFactory {
 	int gap = 20;
+	
+	/**
+	 * Creates a MIDI Node On event with that starts 20 ticks later
+	 */
 	@Override
 	public MidiEvent createNoteOn(int tick, int note, int velocity, int channel) throws InvalidMidiDataException {
 		ShortMessage message = new ShortMessage();
@@ -17,6 +21,9 @@ public class StaccatoMidiEventFactory implements MidiEventFactory {
 	    return new MidiEvent(message, tick + gap);
 	}
 
+	/**
+	 * Creates a MIDI Node Off event that ends 100 ticks earlier
+	 */
 	@Override
 	public MidiEvent createNoteOff(int tick, int note, int channel) throws InvalidMidiDataException {
 		ShortMessage message = new ShortMessage();

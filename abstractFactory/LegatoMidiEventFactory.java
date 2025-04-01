@@ -6,6 +6,9 @@ import javax.sound.midi.ShortMessage;
 
 public class LegatoMidiEventFactory implements MidiEventFactory {
 
+	/**
+	 * Creates a normal MIDI Node On event
+	 */
 	@Override
 	public MidiEvent createNoteOn(int tick, int note, int velocity, int channel) throws InvalidMidiDataException {
 		ShortMessage message = new ShortMessage();
@@ -17,6 +20,9 @@ public class LegatoMidiEventFactory implements MidiEventFactory {
 	    return new MidiEvent(message, tick);
 	}
 
+	/**
+	 * Creates a MIDI Node Off event that ends 80 ticks later
+	 */
 	@Override
 	public MidiEvent createNoteOff(int tick, int note, int channel) throws InvalidMidiDataException {
 		ShortMessage message = new ShortMessage();

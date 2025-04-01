@@ -1,6 +1,9 @@
 import java.io.IOException;
 import java.util.List;
 
+import abstractFactory.MidiEventFactory;
+import abstractFactory.MidiEventFactoryAbstract;
+import abstractFactory.StaccatoMidiEventFactoryAbstract;
 import csvParse.MidiCsvParser;
 import csvParse.MidiEventData;
 
@@ -12,6 +15,10 @@ public class Main {
 		for (MidiEventData temp : resultList) {
 			// System.out.println("" + temp.getNoteOnOff() + "");
 		}
+		
+		MidiEventFactoryAbstract factoryAbstract = null;
+		factoryAbstract = new StaccatoMidiEventFactoryAbstract();
+		MidiEventFactory factory = factoryAbstract.createFactory();
 	}
 
 }

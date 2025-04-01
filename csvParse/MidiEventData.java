@@ -7,6 +7,16 @@ public class MidiEventData {
 	private int channel;
 	private int noteOnOff; // 1 == on && 0 == off
 	private int instrument;
+	
+	/**
+	 * Creates a MidiEventData object using the given parameters:
+	 * @param startEndTick
+	 * @param velocity
+	 * @param note
+	 * @param channel
+	 * @param noteOnOff
+	 * @param instrument
+	 */
 	public MidiEventData(int startEndTick, int velocity, int note, int channel, int noteOnOff, int instrument) {
 		this.startEndTick = startEndTick;
 		this.velocity = velocity;
