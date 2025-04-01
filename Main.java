@@ -10,7 +10,7 @@ public class Main {
 		MidiCsvParser test = new MidiCsvParser();
 		List <MidiEventData> resultList = test.parseCsv("src\\files\\mystery_song.csv");
 		for (MidiEventData temp : resultList) {
-			System.out.println("" + temp.getNoteOnOff() + "");
+			// System.out.println("" + temp.getNoteOnOff() + "");
 		}
 	}
 
